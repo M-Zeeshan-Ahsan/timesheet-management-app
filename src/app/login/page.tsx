@@ -9,8 +9,14 @@ import * as authService from "@/services/auth";
 function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
-
-export default function LoginPage() {
+const LoginPageWithSuspense = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginPage />
+    </Suspense>
+  );
+};
+const LoginPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get("next") || "/dashboard";
@@ -149,4 +155,5 @@ export default function LoginPage() {
       </div>
     </main>
   );
-}
+};
+export default LoginPageWithSuspense;
